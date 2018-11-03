@@ -69,6 +69,9 @@
             socket :{},
         }
     },
+    /**Check if there is a jwt token in the localstorage
+     * if there is i will hide the login screen
+     */
     beforeMount() {
       if(localStorage.token!=undefined)
       {
@@ -109,6 +112,7 @@
         }
         
       },
+      /**loading the chat history when clicking on load chat history */
       loadHistory(){
         this.messagesPage++;
         axios.get(`${Config['serverLink']}/api/message-history/${this.to}?page=${this.messagesPage}&token=${localStorage.token}`)
@@ -127,6 +131,9 @@
           });
         });
       },
+      /**
+       * logout clear the localstorage
+       */
       logOut(){
         this.loged_in=false;
         this.users=[];
@@ -139,6 +146,9 @@
           message : "Loged Out Successfuly"
         });
       },
+      /**
+       * send a new message to the  reciver
+       */
       sendMessage(e) {
         e.preventDefault();
         let postData={to:this.to,message:this.message}
@@ -153,6 +163,9 @@
           });
         })
       },
+      /**
+       * choose the user that you want to chat with
+       */
       sendTo: function(user_id){
         var elem =  this.$el.querySelector(`#user_${user_id}`);
         elem.className=""
@@ -169,6 +182,10 @@
           });
         });
       },
+      /**
+       * entiring the name of the user login
+       * get user data other user and the jwt token
+       */
       login(e) {
         e.preventDefault();
         axios.post(`${Config['serverLink']}/init/${this.user}`,{})
