@@ -16,6 +16,6 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/message-history/{with}','ChatController@getHistory')->middleware('cors')->name("History");
+Route::get('/message-history/{with}','ChatController@getHistory')->middleware('cors')->name("ChatHistory");
 Route::post('/new-message','ChatController@postNewMessage')->middleware('cors')->name("NewMessage");
 

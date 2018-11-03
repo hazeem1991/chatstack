@@ -6,8 +6,8 @@ class Helper
 {
     public static function log($logData)
     {
-        $endpint=\Route::currentRouteName();
-        $logData['endpint']=$endpint;
+        $endpoint=\Route::currentRouteName();
+        $logData['endpoint']=$endpoint;
         Log::create($logData);
     }
     public static function getLog()

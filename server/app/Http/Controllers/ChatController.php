@@ -122,7 +122,7 @@ class ChatController extends Controller
         ->orderBy("created_at",'DESC')
         ->paginate(7);
         $log['method']="GET";
-        $log['request']=$request->except(['token']);
+        $log['request']=json_encode($request->except(['token']));
         $log['response']=json_encode(compact('message'));
         $log['user']=$request->user()->email;
         $helper->log($log);
