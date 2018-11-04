@@ -8,14 +8,14 @@
         <title>Chat App Log</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
+        <link href="{{asset("public/css/app.css")}}" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -58,20 +58,13 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            th, td {
-                text-align: left;
-                padding: 8px;
-                color:#000;
-            }
 
             tr:nth-child(even){background-color: #f2f2f2}
             .m-b-md {
                 margin-bottom: 30px;
+            }
+            pre.sf-dump, pre.sf-dump .sf-dump-default{
+                background:#fff!important;
             }
         </style>
     </head>
@@ -90,10 +83,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel Chat App Log
                 </div>
-                <div>
-                    <table>
+                <div class="container">
+                    <table class="table table-hover">
                         <thead>
                             <th>id</th>
                             <th>user</th>
@@ -104,14 +97,48 @@
                             <th>created_at</th>
                         </thead>
                         <tbody>
-                        @foreach ($log as $l )
+                        @foreach ($log->items() as $l )
                             <tr>
                                 <td>{{$l->id}}</td>
                                 <td>{{$l->user}}</td>
                                 <td>{{$l->endpoint}}</td>
                                 <td>{{$l->method}}</td>
-                                <td><?dump(json_decode($l->request,true))?></td>
-                                <td><?dump(json_decode($l->response,true))?></td>
+                                <td style="text-align:left">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRequest{{$l->id}}">
+                                    View Request Data
+                                    </button>
+                                   
+                                    <div class="modal fade" id="ModalRequest{{$l->id}}" tabindex="-1" role="dialog" aria-labelledby="ModalRequest{{$l->id}}" aria-hidden="true" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-body">
+                                                <?dump(json_decode($l->request,true))?>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align:left">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalResponse{{$l->id}}">
+                                    View Response Data
+                                    </button>
+                                   
+                                    <div class="modal fade" id="ModalResponse{{$l->id}}" tabindex="-1" role="dialog" aria-labelledby="ModalResponse{{$l->id}}" aria-hidden="true" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-body">
+                                                <?dump(json_decode($l->response,true))?>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{$l->created_at}}</td>
                             </tr>
                         @endforeach
@@ -119,13 +146,10 @@
                     </table>
                 </div>
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    {!!$log->links()!!}
                 </div>
             </div>
         </div>
     </body>
+    <script src="{{ asset('public/js/app.js') }}"></script>
 </html>

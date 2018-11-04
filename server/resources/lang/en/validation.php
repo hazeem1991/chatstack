@@ -88,6 +88,7 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'profanity'            => 'The :attribute has bad words.',
+    'check_message'        => ':attribute has some bad data',
 
     /*
     |--------------------------------------------------------------------------

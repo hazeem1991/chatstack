@@ -21,7 +21,7 @@ class NewMessageRequest extends FormRequest
     {
         return [
             'to'=>'required',
-            'message'=>'required|profanity|max:500|min:1'
+            'message'=>'required|checkMessage|max:500|min:1'
         ];
     }
     public function attributes()

@@ -12,7 +12,11 @@ class Helper
     }
     public static function getLog()
     {
-        $log=Log::orderBy('created_at',"DESC")->get();
+        $log=Log::orderBy('created_at',"DESC")->paginate(10);
         return $log ;
+    }
+    public static function checkMessage($msg)
+    {
+        return true;
     }
 }

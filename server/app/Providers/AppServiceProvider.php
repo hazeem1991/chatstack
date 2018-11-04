@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         $this->app->singleton( 'helper' ,'\App\Classes\Helper');
-        //
+        app('validator')->extend('checkMessage', function ($attribute, $value, $parameters, $validator) {
+            return app('helper')->checkMessage($value);
+        });
     }
 
     /**
@@ -26,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
     }
+        
 }

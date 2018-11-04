@@ -25,6 +25,7 @@ class HomeController extends Controller
     {
         $helper = app()->make('helper');
         $log=$helper->getLog();
+        // dd($log);
         return view('welcome')->with(['log'=>$log]);
     }
 }
