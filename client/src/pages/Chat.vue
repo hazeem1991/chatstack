@@ -73,7 +73,7 @@
      * if there is i will hide the login screen
      */
     beforeMount() {
-      if(localStorage.token!=undefined)
+      if(localStorage.token!="undefined")
       {
         this.loged_in=true;
         this.users=JSON.parse(localStorage.allUsers);
@@ -94,6 +94,12 @@
           }
             
         });
+      }
+      else
+      {
+        this.loged_in=false;
+        this.users=undefined;
+        this.myData=undefined;
       }
       
     },

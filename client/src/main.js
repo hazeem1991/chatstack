@@ -57,7 +57,6 @@ const app = new Vue({
   computed: {
     ViewComponent () {
       this.currentRoute=this.currentRoute.replace(this.baseUrl,"/");
-      console.log(this.currentRoute);
       const matchingView = routes[this.currentRoute];
       return matchingView
         ? require('./pages/' + matchingView + '.vue')
