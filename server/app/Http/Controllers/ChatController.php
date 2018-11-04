@@ -87,7 +87,7 @@ class ChatController extends Controller
              */
             event(new NewMessage($newMessage));
             $log['method']="POST";
-            $log['request']=$request->except(['token']);
+            $log['request']=json_encode($request->except(['token']));
             $log['response']=json_encode(compact('newMessageData'));
             $log['user']=$request->user()->email;
             $helper->log($log);
@@ -96,7 +96,7 @@ class ChatController extends Controller
         else
         {
             $log['method']="POST";
-            $log['request']=$request->except(['token']);
+            $log['request']=json_encode($request->except(['token']));
             $log['response']=json_encode(["error"=>"reciver not found"]);
             $log['user']=$request->user()->email;
             $helper->log($log);

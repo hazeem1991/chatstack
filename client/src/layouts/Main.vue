@@ -7,13 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <v-link class="nav-link" href="/">Home</v-link>
+            <v-link class="nav-link" :href="baseUrl+''">Home</v-link>
           </li>
           <li class="nav-item">
-            <v-link class="nav-link" href="/chat">Chat</v-link>
+            <v-link class="nav-link" :href="baseUrl+'chat'">Chat</v-link>
           </li>
           <li class="nav-item">
-            <v-link class="nav-link" href="/about">About</v-link>
+            <v-link class="nav-link" :href="baseUrl+'about'">About</v-link>
           </li>
         </ul>
       </div>
@@ -24,8 +24,13 @@
 
 <script>
   import VLink from '../components/VLink.vue'
-
+  import Config from '../config.js';
   export default {
+    data() {
+      return {
+        baseUrl:Config.clinet_base
+      }
+    },
     components: {
       VLink
     }

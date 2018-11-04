@@ -1,4 +1,5 @@
 export default {
-    'serverLink': 'http://127.0.0.1:8000',
-    'socketLink': 'http://127.0.0.1:3000'
+    'serverLink': 'http://ec2-13-58-226-233.us-east-2.compute.amazonaws.com/chat/index.php',
+    'socketLink': 'http://ec2-13-58-226-233.us-east-2.compute.amazonaws.com:3000',
+    'clinet_base':'/client/'
   }

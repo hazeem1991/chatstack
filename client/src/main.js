@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import routes from './routes'
+import routes from './routes';
+import config from './config'
 import BootstrapVue from 'bootstrap-vue'
 import Toasted from 'vue-toasted';
 import 'bootstrap/dist/css/bootstrap.css'
@@ -47,15 +48,17 @@ Vue.toasted.register('my_app_done',
     },
     options_done
 )
-
 const app = new Vue({
   el: '#app',
   data: {
-    currentRoute: window.location.pathname
+    currentRoute: window.location.pathname,
+    baseUrl:config.clinet_base,
   },
   computed: {
     ViewComponent () {
-      const matchingView = routes[this.currentRoute]
+      this.currentRoute=this.currentRoute.replace(this.baseUrl,"/");
+      console.log(this.currentRoute);
+      const matchingView = routes[this.currentRoute];
       return matchingView
         ? require('./pages/' + matchingView + '.vue')
         : require('./pages/404.vue')
